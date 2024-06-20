@@ -9,7 +9,7 @@ extends Node2D
 
 
 func _ready():
-	name_text = card_name
+	name_text.text = card_name
 	set_atk_num(base_atk)
 	set_hp_num(base_hp)
 

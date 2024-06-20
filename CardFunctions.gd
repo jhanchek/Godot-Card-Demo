@@ -1,7 +1,7 @@
 extends Node2D
 class_name CardFunctions
 
-# Note to self: Maybe instead, this function is the main head, and alternative functions are added with
+# Note to self: Maybe instead, the template is the main head, and alternative functions are added with
 # something resembling the Strategy Pattern: https://www.youtube.com/watch?v=sZDJJeDNe_M
 
 @onready var template = $CardTemplate
@@ -21,11 +21,12 @@ func _process(delta):
 # maybe there should be attack and defend, so that you can tell the difference when one card initiates.
 func attack(target: CardFunctions):
 	print(target)
-	take_damage(target.atk) # take damage from the foe
-	target.take_damage(atk) # fire back
+	target.take_damage(atk) # deal damage to foe
+	take_damage(target.atk) # take damage in return
 	
 func take_damage(damage):
 	hp = hp - damage
-	print(hp)
 	template.set_hp_num(hp)
+	if hp <= 0:
+		queue_free()
 	

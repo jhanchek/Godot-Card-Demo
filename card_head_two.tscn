@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://hsgd7m1hbfbv"]
+
+[ext_resource type="Script" path="res://CardHeadTwo.gd" id="1_27gw0"]
+[ext_resource type="PackedScene" uid="uid://u3paihrbje8x" path="res://card_template.tscn" id="2_3ctp3"]
+[ext_resource type="Texture2D" uid="uid://r8813mckwtch" path="res://amateurdiscopng.png" id="3_h7umx"]
+
+[node name="CardHeadTwo" type="Node2D"]
+script = ExtResource("1_27gw0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(4.49999, -13.5)
+scale = Vector2(0.201, 0.201)
+texture = ExtResource("3_h7umx")
+
+[node name="CardTemplate" parent="." instance=ExtResource("2_3ctp3")]
+card_name = "Amateur"
+base_atk = 1
+base_hp = 5
