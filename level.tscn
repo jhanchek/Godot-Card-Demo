@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://craidou732c18"]
+
+[ext_resource type="PackedScene" uid="uid://blo5atfs2jay5" path="res://card.tscn" id="1_lgics"]
+[ext_resource type="Script" path="res://Button.gd" id="2_8i1me"]
+[ext_resource type="Script" path="res://ATTACK.gd" id="2_i3b4d"]
+[ext_resource type="PackedScene" uid="uid://b6ly11axkxlq2" path="res://card_head.tscn" id="5_vs2jh"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="WelfinCardOne" parent="." instance=ExtResource("5_vs2jh")]
+position = Vector2(191, 186)
+
+[node name="WelfinCardTwo" parent="." instance=ExtResource("5_vs2jh")]
+position = Vector2(498, 187)
+
+[node name="ATTACK" type="Button" parent="."]
+offset_left = 222.0
+offset_top = 363.0
+offset_right = 471.0
+offset_bottom = 463.0
+text = "Attack each other
+"
+script = ExtResource("2_i3b4d")
+
+[node name="LeftWelfOld" parent="." instance=ExtResource("1_lgics")]
+visible = false
+position = Vector2(-123, -45)
+atk = 1
+
+[node name="NodeButton" type="Button" parent="LeftWelfOld"]
+visible = false
+offset_left = 162.0
+offset_top = 317.0
+offset_right = 323.0
+offset_bottom = 409.0
+
+[node name="Button" type="Button" parent="."]
+offset_left = -148.0
+offset_top = 397.0
+offset_right = -26.0
+offset_bottom = 481.0
+text = "button 1"
+script = ExtResource("2_8i1me")
+
+[connection signal="pressed" from="ATTACK" to="ATTACK" method="_on_pressed"]
+[connection signal="pressed" from="Button" to="LeftWelfOld" method="_on_button_pressed" binds= [NodePath("../Disco")]]

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6ly11axkxlq2"]
+
+[ext_resource type="Script" path="res://CardHead.gd" id="1_o8s3n"]
+[ext_resource type="PackedScene" uid="uid://u3paihrbje8x" path="res://card_template.tscn" id="2_d2jo2"]
+[ext_resource type="Texture2D" uid="uid://cxincair5q3to" path="res://welfin.png" id="3_f5qm1"]
+
+[node name="CardHead" type="Node2D"]
+script = ExtResource("1_o8s3n")
+
+[node name="CardTemplate" parent="." instance=ExtResource("2_d2jo2")]
+card_name = "Welfin"
+base_atk = 4
+base_hp = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(0, -13.57)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_f5qm1")

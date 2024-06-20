@@ -1,0 +1,63 @@
+[gd_scene load_steps=5 format=3 uid="uid://7d3ciitymxqa"]
+
+[ext_resource type="Script" path="res://diffcard.gd" id="1_dkhl3"]
+[ext_resource type="Theme" uid="uid://03gaf5plfqa7" path="res://texttheme.tres" id="2_pb5x1"]
+[ext_resource type="Texture2D" uid="uid://cxincair5q3to" path="res://welfin.png" id="2_w402n"]
+[ext_resource type="Texture2D" uid="uid://djbv56smdqq60" path="res://empty_card.png" id="4_4snfa"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_dkhl3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(4, -14)
+scale = Vector2(0.192, 0.192)
+texture = ExtResource("2_w402n")
+
+[node name="CardTemplate" type="Sprite2D" parent="."]
+texture = ExtResource("4_4snfa")
+
+[node name="AtkText" type="Label" parent="."]
+z_index = 1
+offset_left = -43.0
+offset_top = 80.0
+offset_right = 29.0
+offset_bottom = 158.0
+theme = ExtResource("2_pb5x1")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 8
+theme_override_constants/shadow_outline_size = 8
+text = "X"
+
+[node name="HpText" type="Label" parent="."]
+z_index = 1
+offset_left = 54.0
+offset_top = 80.0
+offset_right = 117.0
+offset_bottom = 156.0
+theme = ExtResource("2_pb5x1")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 8
+theme_override_constants/shadow_outline_size = 8
+text = "X"
+
+[node name="NameText" type="Label" parent="."]
+z_index = 1
+offset_left = -65.0
+offset_top = -141.0
+offset_right = 104.0
+offset_bottom = -114.0
+theme = ExtResource("2_pb5x1")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 8
+theme_override_constants/shadow_outline_size = 8
+theme_override_font_sizes/font_size = 19
+text = "SAMPLETEXT"
