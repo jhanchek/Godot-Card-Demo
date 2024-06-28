@@ -8,10 +8,19 @@ func _input_event(viewport, event, shape_idx):
 
 func on_click():
 	var card_head = get_parent().get_parent()
-	print("Click registered on ", card_head)
-	var Target_Line = get_node("/root/Node2D/TargettingLine")
-	#print("TARGET:", Target_Line)
-	Target_Line.draw(card_head)
+	#print("Click registered on ", card_head)
+	
+	var where_am_i = card_head.get_parent().name
+	if where_am_i == "BOARD":
+		var Target_Line = get_node("/root/Node2D/TargettingLine")
+		#print("TARGET:", Target_Line)
+		Target_Line.draw(card_head)
+	elif where_am_i == "HAND":
+		print("PARENT:", get_parent().get_parent())
+		get_parent().get_parent().reparent(get_node("/root/Node2D/BOARD"), false)
+		print("PARENT:", get_parent().get_parent())
+		get_node("/root/Node2D/BOARD").move_cards()
+		
 	
 	
 	

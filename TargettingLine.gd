@@ -29,8 +29,8 @@ func _process(delta):
 	#add_point(Vector2(200, 15))
 	
 func draw(target: CardFunctions): # rename; this function draws the line but can be confused with drawing cards.
-	print("Line function received ", target)
-	print("Currently cached card is ", cached_card)
+	#print("Line function received ", target)
+	#print("Currently cached card is ", cached_card)
 	if cached_card == null:
 		cached_card = target
 		triangle.set("visible", true)

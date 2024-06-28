@@ -7,12 +7,13 @@
 [node name="CardHead" type="Node2D"]
 script = ExtResource("1_o8s3n")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -13.57)
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("3_f5qm1")
-
 [node name="CardTemplate" parent="." instance=ExtResource("2_d2jo2")]
 card_name = "Welfin"
 base_atk = 4
 base_hp = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="CardTemplate"]
+z_index = -1
+position = Vector2(0, -13.57)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_f5qm1")

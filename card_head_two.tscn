@@ -1,18 +1,137 @@
-[gd_scene load_steps=4 format=3 uid="uid://hsgd7m1hbfbv"]
+[gd_scene load_steps=8 format=3 uid="uid://hsgd7m1hbfbv"]
 
 [ext_resource type="Script" path="res://CardHeadTwo.gd" id="1_27gw0"]
 [ext_resource type="PackedScene" uid="uid://u3paihrbje8x" path="res://card_template.tscn" id="2_3ctp3"]
 [ext_resource type="Texture2D" uid="uid://r8813mckwtch" path="res://amateurdiscopng.png" id="3_h7umx"]
 
+[sub_resource type="Animation" id="Animation_wgaj2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ruwh7"]
+resource_name = "hover"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, 0, 0, 0, 0, -10, -0.25, 0, 0.25, 0, 0, 0, 0, 0, 0, 10, -0.25, 0, 0.25, 0, 0, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2)
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5, 0.7, 1, 1.2, 1.5, 1.7, 2),
+"transitions": PackedFloat32Array(1.07177, 1.07177, 1.07177, 1.07177, 1.07177, 1.07177, 1.07177, 1.07177, 1.07177),
+"update": 0,
+"values": [0.0, 0.0523599, 0.0, -0.0523599, 0.0, 0.0523599, 0.0, -0.0523599, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = false
+tracks/3/path = NodePath(".:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -10), Vector2(0, 0), Vector2(0, 10), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cqx08"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lljws"]
+_data = {
+"RESET": SubResource("Animation_wgaj2"),
+"hover": SubResource("Animation_ruwh7"),
+"idle": SubResource("Animation_cqx08")
+}
+
 [node name="CardHeadTwo" type="Node2D"]
 script = ExtResource("1_27gw0")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(4.49999, -13.5)
-scale = Vector2(0.201, 0.201)
-texture = ExtResource("3_h7umx")
 
 [node name="CardTemplate" parent="." instance=ExtResource("2_3ctp3")]
 card_name = "Amateur"
 base_atk = 1
 base_hp = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="CardTemplate"]
+z_index = -1
+position = Vector2(4.49999, -13.5)
+scale = Vector2(0.201, 0.201)
+texture = ExtResource("3_h7umx")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../CardTemplate")
+libraries = {
+"": SubResource("AnimationLibrary_lljws")
+}
