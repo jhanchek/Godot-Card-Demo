@@ -12,14 +12,16 @@ func on_click():
 	
 	var where_am_i = card_head.get_parent().name
 	if where_am_i == "BOARD":
-		var Target_Line = get_node("/root/Node2D/TargettingLine")
+		var Target_Line = get_node("/root/GameManager/TargettingLine")
 		#print("TARGET:", Target_Line)
 		Target_Line.draw(card_head)
 	elif where_am_i == "HAND":
 		print("PARENT:", get_parent().get_parent())
-		get_parent().get_parent().reparent(get_node("/root/Node2D/BOARD"), false)
+		get_parent().get_parent().reparent(get_node("/root/GameManager/BOARD"), false)
 		print("PARENT:", get_parent().get_parent())
-		get_node("/root/Node2D/BOARD").move_cards()
+		get_node("/root/GameManager/HAND").move_cards()
+		get_node("/root/GameManager/BOARD").move_cards()
+		
 		
 	
 	

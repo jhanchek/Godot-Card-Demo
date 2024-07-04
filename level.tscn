@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://craidou732c18"]
+[gd_scene load_steps=13 format=3 uid="uid://craidou732c18"]
 
 [ext_resource type="Script" path="res://HAND.gd" id="1_c4f2n"]
 [ext_resource type="Texture2D" uid="uid://ivu7wj1ndems" path="res://arrow_texture.png" id="3_jh8p4"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://hsgd7m1hbfbv" path="res://card_head_two.tscn" id="6_kxhdb"]
 [ext_resource type="Texture2D" uid="uid://b34yngclhlii7" path="res://arrow_texture_4.png" id="6_txf67"]
 [ext_resource type="Script" path="res://DECK.gd" id="10_tnoow"]
+[ext_resource type="Texture2D" uid="uid://cgygwm7a712vn" path="res://backgroundpy.png" id="11_iuqsy"]
 
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_lmqm4"]
 frames = 4
@@ -22,18 +23,18 @@ frame_2/duration = 1.0
 frame_3/texture = ExtResource("6_txf67")
 frame_3/duration = 1.0
 
-[node name="Node2D" type="Node2D"]
+[node name="GameManager" type="Node2D"]
 
 [node name="DECK" type="Button" parent="."]
-offset_left = 1072.0
-offset_top = 306.0
-offset_right = 1142.0
-offset_bottom = 342.0
+offset_left = 1760.0
+offset_top = 473.0
+offset_right = 1877.0
+offset_bottom = 529.0
 text = "DRAW"
 script = ExtResource("10_tnoow")
 
 [node name="HAND" type="Node2D" parent="."]
-position = Vector2(560, 465)
+position = Vector2(950, 905)
 script = ExtResource("1_c4f2n")
 
 [node name="CardHead" parent="HAND" instance=ExtResource("5_vs2jh")]
@@ -46,7 +47,7 @@ position = Vector2(-8, 347)
 position = Vector2(-283, 346)
 
 [node name="BOARD" type="Node2D" parent="."]
-position = Vector2(566.33, 167)
+position = Vector2(950, 654)
 script = ExtResource("4_p6j7l")
 
 [node name="WelfinCardOne" parent="BOARD" instance=ExtResource("5_vs2jh")]
@@ -75,5 +76,10 @@ script = ExtResource("5_vwde3")
 [node name="Triangle" type="Polygon2D" parent="TargettingLine"]
 color = Color(0.972549, 0.294118, 0.247059, 1)
 polygon = PackedVector2Array(0, -18, 0, 18, 19, 0)
+
+[node name="GameBoard" type="Sprite2D" parent="."]
+z_index = -3
+texture = ExtResource("11_iuqsy")
+offset = Vector2(950, 500)
 
 [connection signal="pressed" from="DECK" to="DECK" method="_on_pressed"]

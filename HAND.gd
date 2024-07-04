@@ -2,9 +2,9 @@ extends Node2D
 
 
 @onready var cards = get_children()
-@onready var left_bound = 151
-@onready var right_bound = 951
-@onready var vertical_position = 465
+@onready var left_bound = 100
+@onready var right_bound = 1800
+@onready var vertical_position = position.y
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	move_cards()
@@ -22,7 +22,7 @@ func _process(delta):
 	
 func move_cards():
 	cards = get_children()
-	print(cards)
+	#print(cards)
 	var num_of_cards = len(cards)
 	var num_of_cards_float: float = float(num_of_cards-1)
 	if num_of_cards_float < 1.0:
@@ -34,4 +34,4 @@ func move_cards():
 			lerp(left_bound, right_bound, i/(num_of_cards_float)),
 			vertical_position
 		))
-		print(cards[i].get("global_position"))
+		#print(cards[i].get("global_position"))

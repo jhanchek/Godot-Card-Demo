@@ -36,7 +36,7 @@ func take_damage(damage):
 	if hp <= 0:
 		var current_parent = get_parent()
 		if current_parent.has_method("move_cards"):
-			reparent(get_node("/root/Node2D/GRAVEYARD"))
+			reparent(get_node("/root/GameManager/GRAVEYARD"))
 			#print("PARENT HAS METHOD!")
 			current_parent.move_cards()
 		queue_free()

@@ -1,9 +1,9 @@
 extends Node2D
 
 @onready var cards = get_children()
-@onready var left_bound = 151
-@onready var right_bound = 951
-@onready var vertical_position = 167
+@onready var left_bound = 100
+@onready var right_bound = 1800
+@onready var vertical_position = position.y
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	move_cards()
