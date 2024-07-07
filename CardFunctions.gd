@@ -7,6 +7,7 @@ class_name CardFunctions
 @onready var template = $CardTemplate
 @onready var atk = template.get("base_atk")
 @onready var hp = template.get("base_hp")
+@onready var player = get_node("/root/GameManager/PlayerOne")
 
 func _ready():
 	pass
@@ -34,12 +35,7 @@ func take_damage(damage):
 	hp = hp - damage
 	template.set_hp_num(hp)
 	if hp <= 0:
-		var current_parent = get_parent()
-		if current_parent.has_method("move_cards"):
-			reparent(get_node("/root/GameManager/GRAVEYARD"))
-			#print("PARENT HAS METHOD!")
-			current_parent.move_cards()
-		queue_free()
+		player.move_to_graveyard(self)
 		
 func before_attack():
 	pass

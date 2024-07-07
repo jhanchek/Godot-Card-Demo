@@ -3,6 +3,8 @@ extends Line2D
 var cached_card = null
 @onready var triangle = $Triangle
 
+var draw_line = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	clear_points()
@@ -11,7 +13,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if cached_card != null:
+	#if cached_card != null:
+	if draw_line == true:
 		var slightly_short_of_mouse = ((get_global_mouse_position() * 10) + (get_point_position(0) * 1)) / 11
 		#set_point_position(1, get_global_mouse_position()) # set the end point to always be where the mouse is
 		#triangle.set("position", get_global_mouse_position())
@@ -27,6 +30,17 @@ func _process(delta):
 	#remove_point(0)
 	#add_point(Vector2(56, 157))
 	#add_point(Vector2(200, 15))
+func set_point(p):
+	triangle.set("visible", true)
+	add_point(p) # point 0 will be static
+	add_point(p) # point 1 will update in _process
+	draw_line = true
+		
+func set_no_points():
+	triangle.set("visible", false)
+	remove_point(0) # maybe just set visibility to false
+	remove_point(0)
+	draw_line = false
 	
 func draw(target: CardFunctions): # rename; this function draws the line but can be confused with drawing cards.
 	#print("Line function received ", target)

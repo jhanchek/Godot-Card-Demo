@@ -1,6 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://craidou732c18"]
+[gd_scene load_steps=16 format=3 uid="uid://craidou732c18"]
 
+[ext_resource type="Script" path="res://GameManager.gd" id="1_60m4a"]
 [ext_resource type="Script" path="res://HAND.gd" id="1_c4f2n"]
+[ext_resource type="Script" path="res://PlayerOne.gd" id="2_r83h2"]
+[ext_resource type="Script" path="res://PlayerTwo.gd" id="3_ceacy"]
 [ext_resource type="Texture2D" uid="uid://ivu7wj1ndems" path="res://arrow_texture.png" id="3_jh8p4"]
 [ext_resource type="Texture2D" uid="uid://di3jqy0a0choy" path="res://arrow_texture_2.png" id="4_4txhr"]
 [ext_resource type="Script" path="res://BOARD.gd" id="4_p6j7l"]
@@ -24,8 +27,31 @@ frame_3/texture = ExtResource("6_txf67")
 frame_3/duration = 1.0
 
 [node name="GameManager" type="Node2D"]
+script = ExtResource("1_60m4a")
+
+[node name="PlayerOne" type="Node2D" parent="."]
+script = ExtResource("2_r83h2")
+
+[node name="Button" type="Button" parent="PlayerOne"]
+offset_left = 1706.0
+offset_top = 608.0
+offset_right = 1819.0
+offset_bottom = 669.0
+text = "P1 draw"
+
+[node name="PlayerTwo" type="Node2D" parent="."]
+script = ExtResource("3_ceacy")
+
+[node name="Button" type="Button" parent="PlayerTwo"]
+visible = false
+offset_left = 1705.0
+offset_top = 356.0
+offset_right = 1815.0
+offset_bottom = 415.0
+text = "P2 draw"
 
 [node name="DECK" type="Button" parent="."]
+visible = false
 offset_left = 1760.0
 offset_top = 473.0
 offset_right = 1877.0
@@ -34,6 +60,7 @@ text = "DRAW"
 script = ExtResource("10_tnoow")
 
 [node name="HAND" type="Node2D" parent="."]
+visible = false
 position = Vector2(950, 905)
 script = ExtResource("1_c4f2n")
 
@@ -47,6 +74,7 @@ position = Vector2(-8, 347)
 position = Vector2(-283, 346)
 
 [node name="BOARD" type="Node2D" parent="."]
+visible = false
 position = Vector2(950, 654)
 script = ExtResource("4_p6j7l")
 
@@ -78,8 +106,17 @@ color = Color(0.972549, 0.294118, 0.247059, 1)
 polygon = PackedVector2Array(0, -18, 0, 18, 19, 0)
 
 [node name="GameBoard" type="Sprite2D" parent="."]
+visible = false
 z_index = -3
 texture = ExtResource("11_iuqsy")
 offset = Vector2(950, 500)
 
+[node name="Button" type="Button" parent="."]
+offset_left = 1680.0
+offset_top = 471.0
+offset_right = 1847.0
+offset_bottom = 543.0
+text = "swap turns"
+
+[connection signal="pressed" from="PlayerOne/Button" to="PlayerOne" method="_on_button_pressed"]
 [connection signal="pressed" from="DECK" to="DECK" method="_on_pressed"]
