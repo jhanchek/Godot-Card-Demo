@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqbnwrb512nl1"]
+
+[ext_resource type="Script" path="res://Great Cobra.gd" id="1_eujru"]
+[ext_resource type="PackedScene" uid="uid://u3paihrbje8x" path="res://card_template.tscn" id="2_io0mf"]
+[ext_resource type="Texture2D" uid="uid://blx6f77x2f11j" path="res://denungeherrholm/denungeherrholm/000 #1327 - Great Cobra-X4.jpg" id="3_ij3eb"]
+
+[node name="Great Cobra" type="Node2D"]
+script = ExtResource("1_eujru")
+
+[node name="CardTemplate" parent="." instance=ExtResource("2_io0mf")]
+
+[node name="TextureRect" type="TextureRect" parent="CardTemplate"]
+visible = false
+show_behind_parent = true
+offset_left = -98.0
+offset_top = -63.0
+offset_right = 276.0
+offset_bottom = 94.0
+texture = ExtResource("3_ij3eb")
+expand_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="CardTemplate"]
+z_index = -1
+position = Vector2(-4, -28)
+scale = Vector2(0.149806, 0.149806)
+texture = ExtResource("3_ij3eb")

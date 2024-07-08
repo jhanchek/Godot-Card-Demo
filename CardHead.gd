@@ -1,3 +1,4 @@
 extends CardFunctions
 
-@onready var asdf = $CardTemplate
+func battlecry():
+	set_atk(atk * 2)

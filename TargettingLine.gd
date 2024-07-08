@@ -42,19 +42,3 @@ func set_no_points():
 	remove_point(0)
 	draw_line = false
 	
-func draw(target: CardFunctions): # rename; this function draws the line but can be confused with drawing cards.
-	#print("Line function received ", target)
-	#print("Currently cached card is ", cached_card)
-	if cached_card == null:
-		cached_card = target
-		triangle.set("visible", true)
-		add_point(cached_card.global_position) # point 0 will be static
-		add_point(cached_card.global_position) # point 1 will update in _process
-	else:
-		if cached_card != target:
-			cached_card.attack(target)
-		cached_card = null
-		triangle.set("visible", false)
-		remove_point(0) # maybe just set visibility to false
-		remove_point(0)
-	

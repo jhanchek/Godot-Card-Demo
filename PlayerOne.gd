@@ -10,16 +10,7 @@ var board_y = 654
 var max_hand_size = 7
 var max_board_size = 7
 
-var deck_list = [
-	"card_head",
-	"card_head_two",
-	"card_head",
-	"card_head_two",
-	"card_head",
-	"card_head_two",
-	"card_head",
-	"card_head_two"
-]
+var deck_list = []
 var hand = []
 var board = []
 var graveyard = []
@@ -94,6 +85,9 @@ func put_into_play(card):
 	var index = hand.find(card)
 	board.append(hand.pop_at(index))
 	set_new_card_positions()
+	if card.has_method("battlecry"):
+		print("IF")
+		card.battlecry()
 	
 func targetting_system(target):
 	if cached_card == null:
@@ -109,6 +103,14 @@ func move_to_graveyard(card):
 	var index = board.find(card)
 	graveyard.append(board.pop_at(index))
 	set_new_card_positions()
+	if card.has_method("deathrattle"):
+		card.deathrattle()
+	
+func get_cards_in_hand():
+	return hand
+	
+func get_cards_on_board():
+	return board
 	
 	
 	

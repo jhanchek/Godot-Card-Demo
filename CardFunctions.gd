@@ -13,7 +13,7 @@ func _ready():
 	pass
 
 func battlecry():
-	pass
+	print("DEF")
 
 func _process(delta):
 	pass
@@ -42,4 +42,12 @@ func before_attack():
 	
 func after_attack():
 	pass
+	
+func set_atk(a):
+	atk = a
+	template.set_atk_num(atk)
+	
+func set_hp(h):
+	hp = h
+	template.set_hp_num(hp)
 	
