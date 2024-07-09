@@ -4,6 +4,8 @@ extends Node2D
 @onready var player_two = $PlayerTwo
 @onready var current_player = player_one
 
+var when_card_is_played_list = []
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -12,6 +14,21 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+	
+func add_to_list(card, list):
+	if list == "wcip":
+		when_card_is_played_list.append(card)
+		
+func remove_from_list(card):
+	if when_card_is_played_list.has(card):
+		print("REMOVING CARD")
+		when_card_is_played_list.remove_at(when_card_is_played_list.find(card))
+	
+func when_card_is_played():
+	for card in when_card_is_played_list:
+		print("ACTIVATED")
+		card.do_effect()
+	
 	
 # TODO
 # Players have a deck, a hand, a board, and a graveyard

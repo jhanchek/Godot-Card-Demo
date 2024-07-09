@@ -86,8 +86,10 @@ func put_into_play(card):
 	board.append(hand.pop_at(index))
 	set_new_card_positions()
 	if card.has_method("battlecry"):
-		print("IF")
 		card.battlecry()
+	GameManager.when_card_is_played()
+	if card.has_method("get_list"):
+		GameManager.add_to_list(card, card.get_list())
 	
 func targetting_system(target):
 	if cached_card == null:
