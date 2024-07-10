@@ -1,19 +1,41 @@
 extends Node2D
 
-@onready var player_one = $PlayerOne
-@onready var player_two = $PlayerTwo
+@onready var player_one = $Player1
+@onready var player_two = $Player2
 @onready var current_player = player_one
 
+@onready var line = $TargettingLine
 var when_card_is_played_list = []
+
+var cached_card = null
+var opp_cached_card = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+	
+func is_my_turn(player):
+	return current_player == player
+	
+func targetting_system(target):
+	if target.get_parent() == current_player:
+		if cached_card == null:
+			cached_card = target
+			line.set_point(cached_card.position)
+		else:
+			target_deselect()
+	elif cached_card != null:
+		cached_card.attack(target)
+		cached_card = null
+		target_deselect()
+		
+func target_deselect():
+	cached_card = null
+	line.set_no_points()
 	
 func add_to_list(card, list):
 	if list == "wcip":
@@ -24,10 +46,16 @@ func remove_from_list(card):
 		print("REMOVING CARD")
 		when_card_is_played_list.remove_at(when_card_is_played_list.find(card))
 	
-func when_card_is_played():
+func when_card_is_played(c):
 	for card in when_card_is_played_list:
-		print("ACTIVATED")
-		card.do_effect()
+		#print("ACTIVATED")
+		card.do_effect(c)
+		
+func pass_turn():
+	if current_player == player_one:
+		current_player = player_two
+	elif current_player == player_two:
+		current_player = player_one
 	
 	
 # TODO

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bauyj6ucpfrtw"]
+
+[ext_resource type="Script" path="res://Player.gd" id="1_c24y7"]
+[ext_resource type="Texture2D" uid="uid://xs1pumaiyrpb" path="res://art/card_back.png" id="2_0bvuf"]
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_c24y7")
+
+[node name="Button" type="Button" parent="."]
+offset_left = -110.0
+offset_top = -154.0
+offset_right = 110.0
+offset_bottom = 153.0
+icon = ExtResource("2_0bvuf")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

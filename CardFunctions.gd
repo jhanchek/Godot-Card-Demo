@@ -7,7 +7,7 @@ class_name CardFunctions
 @onready var template = $CardTemplate
 @onready var atk = template.get("base_atk")
 @onready var hp = template.get("base_hp")
-@onready var player = get_node("/root/GameManager/PlayerOne")
+@onready var player = null
 
 func _ready():
 	pass
@@ -17,6 +17,10 @@ func battlecry():
 
 func _process(delta):
 	pass
+	
+func set_player(p):
+	player = p
+	template.find_child("ClickableArea").set_player(p)
 	
 # should be one "attack" function with optional "on_attack" and "on_defend" functions
 # maybe there should be attack and defend, so that you can tell the difference when one card initiates.

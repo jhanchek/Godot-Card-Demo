@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://craidou732c18"]
+[gd_scene load_steps=12 format=3 uid="uid://craidou732c18"]
 
 [ext_resource type="Script" path="res://GameManager.gd" id="1_60m4a"]
+[ext_resource type="PackedScene" uid="uid://bauyj6ucpfrtw" path="res://player.tscn" id="2_084ks"]
 [ext_resource type="Script" path="res://PlayerOne.gd" id="2_r83h2"]
 [ext_resource type="Script" path="res://PlayerTwo.gd" id="3_ceacy"]
 [ext_resource type="Texture2D" uid="uid://ivu7wj1ndems" path="res://arrow_texture.png" id="3_jh8p4"]
@@ -24,7 +25,18 @@ frame_3/duration = 1.0
 [node name="GameManager" type="Node2D"]
 script = ExtResource("1_60m4a")
 
+[node name="Player1" parent="." instance=ExtResource("2_084ks")]
+deck_sprite_x = 1640
+deck_sprite_y = 622
+
+[node name="Player2" parent="." instance=ExtResource("2_084ks")]
+hand_y = 95
+board_y = 346
+deck_sprite_x = 1640
+deck_sprite_y = 60
+
 [node name="PlayerOne" type="Node2D" parent="."]
+visible = false
 script = ExtResource("2_r83h2")
 
 [node name="Button" type="Button" parent="PlayerOne"]
@@ -36,6 +48,7 @@ text = "P1 draw"
 metadata/_edit_use_anchors_ = true
 
 [node name="PlayerTwo" type="Node2D" parent="."]
+visible = false
 script = ExtResource("3_ceacy")
 
 [node name="Button" type="Button" parent="PlayerTwo"]
@@ -69,6 +82,7 @@ offset_left = 1680.0
 offset_top = 471.0
 offset_right = 1847.0
 offset_bottom = 543.0
-text = "swap turns"
+text = "PASS"
 
 [connection signal="pressed" from="PlayerOne/Button" to="PlayerOne" method="_on_button_pressed"]
+[connection signal="pressed" from="Button" to="." method="pass_turn"]

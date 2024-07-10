@@ -6,5 +6,6 @@ func battlecry():
 func get_list(): # requests to be added to a list
 	return "wcip"
 	
-func do_effect():
-	set_hp(hp + 1)
+func do_effect(card):
+	if card.player == self.player:
+		set_hp(hp + 1)
