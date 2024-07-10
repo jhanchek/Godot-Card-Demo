@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://x35gk55ij1d7"]
-
-[ext_resource type="Script" path="res://cardgen.gd" id="1_a33v7"]
-
-[node name="cardgen" type="Node2D"]
-script = ExtResource("1_a33v7")
-atk = 3
-hp = 3
-art = "res://welfin.png"

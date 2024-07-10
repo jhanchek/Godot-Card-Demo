@@ -1,25 +1,23 @@
-[gd_scene load_steps=12 format=3 uid="uid://craidou732c18"]
+[gd_scene load_steps=10 format=3 uid="uid://craidou732c18"]
 
 [ext_resource type="Script" path="res://GameManager.gd" id="1_60m4a"]
 [ext_resource type="PackedScene" uid="uid://bauyj6ucpfrtw" path="res://player.tscn" id="2_084ks"]
-[ext_resource type="Script" path="res://PlayerOne.gd" id="2_r83h2"]
-[ext_resource type="Script" path="res://PlayerTwo.gd" id="3_ceacy"]
-[ext_resource type="Texture2D" uid="uid://ivu7wj1ndems" path="res://arrow_texture.png" id="3_jh8p4"]
-[ext_resource type="Texture2D" uid="uid://di3jqy0a0choy" path="res://arrow_texture_2.png" id="4_4txhr"]
-[ext_resource type="Texture2D" uid="uid://bb308nnvdgj3g" path="res://arrow_texture_3.png" id="5_a3wy6"]
+[ext_resource type="Texture2D" uid="uid://ivu7wj1ndems" path="res://art/arrow/arrow_texture.png" id="3_0fj6s"]
+[ext_resource type="Texture2D" uid="uid://di3jqy0a0choy" path="res://art/arrow/arrow_texture_2.png" id="4_3ytyc"]
+[ext_resource type="Texture2D" uid="uid://bb308nnvdgj3g" path="res://art/arrow/arrow_texture_3.png" id="5_kga2v"]
 [ext_resource type="Script" path="res://TargettingLine.gd" id="5_vwde3"]
-[ext_resource type="Texture2D" uid="uid://b34yngclhlii7" path="res://arrow_texture_4.png" id="6_txf67"]
+[ext_resource type="Texture2D" uid="uid://b34yngclhlii7" path="res://art/arrow/arrow_texture_4.png" id="6_88bw1"]
 [ext_resource type="Texture2D" uid="uid://cgygwm7a712vn" path="res://backgroundpy.png" id="11_iuqsy"]
 
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_lmqm4"]
 frames = 4
 speed_scale = -10.0
-frame_0/texture = ExtResource("3_jh8p4")
-frame_1/texture = ExtResource("4_4txhr")
+frame_0/texture = ExtResource("3_0fj6s")
+frame_1/texture = ExtResource("4_3ytyc")
 frame_1/duration = 1.0
-frame_2/texture = ExtResource("5_a3wy6")
+frame_2/texture = ExtResource("5_kga2v")
 frame_2/duration = 1.0
-frame_3/texture = ExtResource("6_txf67")
+frame_3/texture = ExtResource("6_88bw1")
 frame_3/duration = 1.0
 
 [node name="GameManager" type="Node2D"]
@@ -34,30 +32,6 @@ hand_y = 95
 board_y = 346
 deck_sprite_x = 1640
 deck_sprite_y = 60
-
-[node name="PlayerOne" type="Node2D" parent="."]
-visible = false
-script = ExtResource("2_r83h2")
-
-[node name="Button" type="Button" parent="PlayerOne"]
-offset_left = 1706.0
-offset_top = 608.0
-offset_right = 1819.0
-offset_bottom = 669.0
-text = "P1 draw"
-metadata/_edit_use_anchors_ = true
-
-[node name="PlayerTwo" type="Node2D" parent="."]
-visible = false
-script = ExtResource("3_ceacy")
-
-[node name="Button" type="Button" parent="PlayerTwo"]
-visible = false
-offset_left = 1705.0
-offset_top = 356.0
-offset_right = 1815.0
-offset_bottom = 415.0
-text = "P2 draw"
 
 [node name="TargettingLine" type="Line2D" parent="."]
 texture_repeat = 2
@@ -84,5 +58,4 @@ offset_right = 1847.0
 offset_bottom = 543.0
 text = "PASS"
 
-[connection signal="pressed" from="PlayerOne/Button" to="PlayerOne" method="_on_button_pressed"]
 [connection signal="pressed" from="Button" to="." method="pass_turn"]
