@@ -12,7 +12,11 @@ var opp_cached_card = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	var file = FileAccess.open("res://cardStats.csv", FileAccess.READ)
+	print(file.get_as_text())
+	print(file.get_csv_line())
+	print(file.get_csv_line())
+	file.close()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -52,11 +56,11 @@ func when_card_is_played(c):
 		card.do_effect(c)
 		
 func pass_turn():
+	SignalBus.turn_end.emit(current_player)
 	if current_player == player_one:
 		current_player = player_two
 	elif current_player == player_two:
 		current_player = player_one
-	
 	
 # TODO
 # Players have a deck, a hand, a board, and a graveyard

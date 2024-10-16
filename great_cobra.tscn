@@ -8,6 +8,8 @@
 script = ExtResource("1_eujru")
 
 [node name="CardTemplate" parent="." instance=ExtResource("2_io0mf")]
+base_atk = 1
+base_hp = 1
 
 [node name="TextureRect" type="TextureRect" parent="CardTemplate"]
 visible = false

@@ -1,8 +1,9 @@
 card_head
 card_head_two
-card_head
+great_cobra
 card_head_two
 card_head
+great_cobra
 card_head_two
 card_head
 card_head_two

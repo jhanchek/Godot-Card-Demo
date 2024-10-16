@@ -19,6 +19,7 @@ var graveyard = []
 
 var card_positions = {}
 
+# TODO outdated?
 @onready var line = get_node("/root/GameManager/TargettingLine")
 var cached_card = null
 @onready var game_manager = get_node("/root/GameManager")
@@ -93,21 +94,12 @@ func put_into_play(card):
 	GameManager.when_card_is_played(card)
 	if card.has_method("get_list"):
 		GameManager.add_to_list(card, card.get_list())
-	
-func targetting_system(target):
-	if cached_card == null:
-		cached_card = target
-		line.set_point(cached_card.position)
-	else:
-		if cached_card != target:
-			cached_card.attack(target)
-		cached_card = null
-		line.set_no_points()
 		
 func move_to_graveyard(card):
 	var index = board.find(card)
 	graveyard.append(board.pop_at(index))
 	set_new_card_positions()
+	# TODO remove from list
 	if card.has_method("deathrattle"):
 		card.deathrattle()
 	

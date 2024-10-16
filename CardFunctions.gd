@@ -13,12 +13,12 @@ func _ready():
 	pass
 
 func battlecry():
-	print("DEF")
+	pass
 
 func _process(delta):
 	pass
 	
-func set_player(p):
+func set_player(p): # TODO set p: Player
 	player = p
 	template.find_child("ClickableArea").set_player(p)
 	
@@ -28,7 +28,7 @@ func attack(target: CardFunctions):
 	before_attack()
 	target.take_damage(atk) # deal damage to foe
 	#target.defend(self)
-	after_attack()
+	after_attack(self, target)
 	take_damage(target.atk) # take damage in return
 	
 func defend(attacker: CardFunctions):
@@ -36,15 +36,17 @@ func defend(attacker: CardFunctions):
 	pass
 	
 func take_damage(damage):
-	hp = hp - damage
-	template.set_hp_num(hp)
 	if hp <= 0:
+		return
+	set_hp(hp - damage)
+	if hp <= 0:
+		SignalBus.card_dies.emit(self)
 		player.move_to_graveyard(self)
 		
 func before_attack():
 	pass
 	
-func after_attack():
+func after_attack(u, t):
 	pass
 	
 func set_atk(a):
@@ -54,4 +56,12 @@ func set_atk(a):
 func set_hp(h):
 	hp = h
 	template.set_hp_num(hp)
+	
+func burn_self(p):
+	take_damage(1)
+	
+func disconnect_myself():
+	var connections = get_incoming_connections()
+	for c in connections:
+		c.signal.disconnect(c.callable)
 	

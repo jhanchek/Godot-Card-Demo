@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://cv4umehew1d4"
+
+[deps]
+
+files=["res://cardStats.2.translation", "res://cardStats.1.translation"]
+
+source_file="res://cardStats.csv"
+dest_files=["res://cardStats.2.translation", "res://cardStats.1.translation"]
+
+[params]
+
+compress=true
+delimiter=0

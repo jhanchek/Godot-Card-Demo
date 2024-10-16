@@ -15,6 +15,11 @@ run/main_scene="res://level.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+SignalBus="*res://SignalBus.gd"
+BasicEffects="*res://BasicEffects.gd"
+
 [display]
 
 window/size/viewport_width=1900
