@@ -8,6 +8,7 @@
 script = ExtResource("1_eujru")
 
 [node name="CardTemplate" parent="." instance=ExtResource("2_io0mf")]
+card_name = "Great Cobra"
 base_atk = 1
 base_hp = 1
 

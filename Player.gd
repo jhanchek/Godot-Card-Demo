@@ -50,6 +50,7 @@ func _on_button_pressed():
 	if !deck_list.is_empty() and len(hand) < max_hand_size and game_manager.is_my_turn(self):
 		#draw_card()
 		game_manager.queue_action(draw_card)
+	print(self)
 		
 func draw_card():
 	var top_card = deck_list.pop_at(0)
@@ -122,3 +123,11 @@ func get_cards_in_hand():
 	
 func get_cards_on_board():
 	return board
+
+func _to_string():
+	var me = str("Player: ", player_name)
+	me += str("\nDeck: ", str(deck_list))
+	me += str("\nHand: ", str(hand))
+	me += str("\nBoard: ", str(board))
+	me += str("\nGraveyard: ", str(graveyard))
+	return me

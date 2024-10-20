@@ -65,4 +65,7 @@ func disconnect_myself():
 	var connections = get_incoming_connections()
 	for c in connections:
 		c.signal.disconnect(c.callable)
+		
+func _to_string():
+	return str(template.card_name, " ", atk, "/", hp)
 	
