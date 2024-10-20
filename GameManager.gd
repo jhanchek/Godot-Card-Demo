@@ -10,17 +10,25 @@ var when_card_is_played_list = []
 var cached_card = null
 var opp_cached_card = null
 
+var action_queue = []
+var fast_queue = []
+var act_cooldown = false
+
+var all_card_data = []
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var file = FileAccess.open("res://cardStats.csv", FileAccess.READ)
-	print(file.get_as_text())
-	print(file.get_csv_line())
-	print(file.get_csv_line())
+	while !file.eof_reached():
+		all_card_data.append(file.get_csv_line())
+	print(all_card_data)
+	print(all_card_data[2])
 	file.close()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if !act_cooldown:
+		process_action()
 	
 func is_my_turn(player):
 	return current_player == player
@@ -55,6 +63,15 @@ func when_card_is_played(c):
 		#print("ACTIVATED")
 		card.do_effect(c)
 		
+		
+# NOTE Passing turn should be queued. I can't bind callables to signal connections in the Node tab.
+# By the same logic, clicking the deck should queue the button press as well. WHY:
+# Currently, this works. You draw cards, pass turn, and draw cards. The game checks that it's your turn when you
+# press the deck, and then queues the card draw, even if the opposing player is still drawing.
+# Once passing turn is queued, it will be possible for you to pass, try to draw on your turn, but have your inputs
+# deleted because the turn has not yet passed.
+# However, you likely won't draw directly anyway in the final game, so this may be no big deal.
+# It's okay to have unintended consequences for unintended actions.
 func pass_turn():
 	SignalBus.turn_end.emit(current_player)
 	if current_player == player_one:
@@ -71,6 +88,25 @@ func pass_turn():
 # If a card is clicked, see if it's in the current player's hand or board.
 # If in hand, see if it can be moved to board.
 # If on board, track it for targetting logic.
-# NOTE should there even be a HAND and BOARD or should all cards just float together?
-# NOTE when a card_move is going to take place, generate all current and new card positions.
-# Then lerp() all cards between old and new positions.
+
+func queue_action(c):
+	action_queue.append(c)
+	
+func queue_fast_action(c):
+	fast_queue.append(c)
+	
+func process_action():
+	if !fast_queue.is_empty():
+		var action = fast_queue.pop_front()
+		action.call()
+		act_cooldown = true
+		$Timer.start(0.5)
+	elif !action_queue.is_empty():
+		var action = action_queue.pop_front()
+		action.call()
+		act_cooldown = true
+		$Timer.start(0.5)
+
+func _on_timer_timeout():
+	act_cooldown = false
+

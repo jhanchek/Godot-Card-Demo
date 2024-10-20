@@ -24,10 +24,12 @@ frame_3/duration = 1.0
 script = ExtResource("1_60m4a")
 
 [node name="Player1" parent="." instance=ExtResource("2_084ks")]
+player_name = "Inez"
 deck_sprite_x = 1640
 deck_sprite_y = 622
 
 [node name="Player2" parent="." instance=ExtResource("2_084ks")]
+player_name = "Tony"
 hand_y = 95
 board_y = 346
 deck_sprite_x = 1640
@@ -58,4 +60,9 @@ offset_right = 1847.0
 offset_bottom = 543.0
 text = "PASS"
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [connection signal="pressed" from="Button" to="." method="pass_turn"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

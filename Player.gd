@@ -42,19 +42,25 @@ func _process(delta):
 		card.set("global_position", lerp(card.position, card_positions[card], 0.1))
 		
 	for card in graveyard:
+		print(card)
 		card.set("global_position", lerp(card.position, Vector2(-200, 610), 0.1))
+		# NOTE some bug exists when you pass under certain conditiions. I assume it's poison tick related.
 
 func _on_button_pressed():
 	if !deck_list.is_empty() and len(hand) < max_hand_size and game_manager.is_my_turn(self):
-		var top_card = deck_list.pop_at(0)
-		var loaded_card = load("res://" + top_card + ".tscn")
-		var new_card = loaded_card.instantiate()
-		add_child(new_card)
-		hand.append(new_card)
-		new_card.set("global_position", Vector2(deck_sprite_x + 155, deck_sprite_y + 100))
-		new_card.set_player(self)
+		#draw_card()
+		game_manager.queue_action(draw_card)
 		
-		set_new_card_positions()
+func draw_card():
+	var top_card = deck_list.pop_at(0)
+	var loaded_card = load("res://" + top_card + ".tscn")
+	var new_card = loaded_card.instantiate()
+	add_child(new_card)
+	hand.append(new_card)
+	new_card.set("global_position", Vector2(deck_sprite_x + 155, deck_sprite_y + 100))
+	new_card.set_player(self)
+		
+	set_new_card_positions()
 		
 func set_new_card_positions():
 	card_positions.clear()
@@ -81,7 +87,8 @@ func register_click(card):
 	if hand.has(card) and game_manager.is_my_turn(self):
 		game_manager.target_deselect()
 		if len(board) < max_board_size:
-			put_into_play(card)
+			#put_into_play(card)
+			game_manager.queue_action(put_into_play.bind(card))
 	elif board.has(card):
 		game_manager.targetting_system(card)
 		
@@ -90,7 +97,8 @@ func put_into_play(card):
 	board.append(hand.pop_at(index))
 	set_new_card_positions()
 	if card.has_method("battlecry"):
-		card.battlecry()
+		#card.battlecry()
+		game_manager.queue_fast_action(card.battlecry)
 	GameManager.when_card_is_played(card)
 	if card.has_method("get_list"):
 		GameManager.add_to_list(card, card.get_list())
@@ -101,7 +109,13 @@ func move_to_graveyard(card):
 	set_new_card_positions()
 	# TODO remove from list
 	if card.has_method("deathrattle"):
-		card.deathrattle()
+		#card.deathrattle()
+		game_manager.queue_fast_action(card.deathrattle)
+		# NOTE Maybe fast actions just go at the front of the queue instead.
+		# When 3 amateurs take lethal poison damage, they all take dmg before any deathrattles activate.
+		# If you prefer that one dies, activates deathrattle, and heals the others before they die, this should get priority.
+		# Otherwise, current implementation is fine.
+		card.disconnect_myself()
 	
 func get_cards_in_hand():
 	return hand

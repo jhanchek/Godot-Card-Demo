@@ -58,7 +58,8 @@ func set_hp(h):
 	template.set_hp_num(hp)
 	
 func burn_self(p):
-	take_damage(1)
+	#take_damage(1)
+	get_node("/root/GameManager").queue_fast_action(take_damage.bind(1))
 	
 func disconnect_myself():
 	var connections = get_incoming_connections()

@@ -13,7 +13,7 @@ func on_turn_end(p):
 	
 func after_attack(u, t):
 	SignalBus.turn_end.connect(t.burn_self) # This works
-	disconnect_myself()
+	#disconnect_myself()
 	#SignalBus.turn_end.connect(t.take_damage.bind(1)) # TODO does this work?
 	#SignalBus.turn_end.connect(BasicEffects.burn.bind(t)) # This does not work.
 
