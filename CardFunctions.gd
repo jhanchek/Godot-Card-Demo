@@ -9,6 +9,21 @@ class_name CardFunctions
 @onready var hp = template.get("base_hp")
 @onready var player = null
 
+var effects = []
+
+class eff:
+	var name
+	var source
+	var desc
+	
+	func _init(_name, _source, _desc):
+		name = _name
+		source = _source
+		desc = _desc
+		
+	func _to_string():
+		return str(name, " from ", source, ": ", desc)
+
 func _ready():
 	pass
 
@@ -44,7 +59,7 @@ func take_damage(damage):
 		player.move_to_graveyard(self)
 		
 func before_attack():
-	pass
+	print(effects)
 	
 func after_attack(u, t):
 	pass
@@ -68,4 +83,7 @@ func disconnect_myself():
 		
 func _to_string():
 	return str(template.card_name, " ", atk, "/", hp)
+	
+func apply_effect(name, source, desc):
+	effects.append(eff.new(name, source, desc))
 	

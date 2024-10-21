@@ -42,7 +42,8 @@ func _process(delta):
 		card.set("global_position", lerp(card.position, card_positions[card], 0.1))
 		
 	for card in graveyard:
-		print(card)
+		#print("=================")
+		#print(card)
 		card.set("global_position", lerp(card.position, Vector2(-200, 610), 0.1))
 		# NOTE some bug exists when you pass under certain conditiions. I assume it's poison tick related.
 
